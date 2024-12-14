@@ -1,13 +1,11 @@
 package com.example.clinic
 
 import android.app.Application
-import com.example.clinic.data.AppContainer
-import com.example.clinic.data.DefaultContainer
 
-class ClinicApplication:Application() {
-    lateinit var container: AppContainer
+class ClinicApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
-        container = DefaultContainer()
+        // Дополнительная инициализация, если потребуется
     }
 }

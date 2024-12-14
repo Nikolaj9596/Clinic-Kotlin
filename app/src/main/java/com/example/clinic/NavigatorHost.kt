@@ -1,7 +1,19 @@
 package com.example.clinic
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.clinic.ui.auth.LoginScreen
+import com.example.clinic.ui.main.AppointmentsScreen
+import com.example.clinic.ui.main.ClientsScreen
+import com.example.clinic.ui.main.DiagnosesScreen
+import com.example.clinic.ui.main.DoctorsScreen
+import com.example.clinic.ui.main.MainScreen
+
 @Composable
-fun NavigationHost(navController: NavController, modifier: Modifier = Modifier) {
+fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
         startDestination = "login",
@@ -15,4 +27,3 @@ fun NavigationHost(navController: NavController, modifier: Modifier = Modifier) 
         composable("diagnoses") { DiagnosesScreen() }
     }
 }
-

@@ -1,10 +1,20 @@
 package com.example.clinic.ui.auth
 
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var isError by remember { mutableStateOf(false) }
+    var email: String by remember { mutableStateOf("") }
+    var password: String by remember { mutableStateOf("") }
+    var isError: Boolean by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -50,7 +60,7 @@ fun LoginScreen(navController: NavController) {
         if (isError) {
             Text(
                 text = "Неверные данные",
-                color = MaterialTheme.colors.error,
+                color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
