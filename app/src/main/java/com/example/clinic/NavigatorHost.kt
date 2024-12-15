@@ -25,7 +25,7 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         composable("clients") { ClientsScreen(navController = navController) }
         composable("client_details/{clientId}") { backStackEntry ->
             val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
-            ClientDetailsScreen(clientId = clientId)
+            ClientDetailsScreen(clientId = clientId, onDelete = {clientId}, onEdit = {clientId})
         }
         composable("doctors") { DoctorsScreen() }
         composable("appointments") { AppointmentsScreen() }

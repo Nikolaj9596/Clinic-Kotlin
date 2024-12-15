@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                             composable("clients") { ClientsScreen(navController = navController) }
                             composable("client_details/{clientId}") { backStackEntry ->
                                 val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
-                                ClientDetailsScreen(clientId = clientId)
+                                ClientDetailsScreen(clientId = clientId, onEdit = {clientId}, onDelete = {clientId})
                             }
                             composable("doctors") { DoctorsScreen() }
                             composable("appointments") { AppointmentsScreen() }

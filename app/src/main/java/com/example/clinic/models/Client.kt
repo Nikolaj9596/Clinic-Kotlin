@@ -9,6 +9,7 @@ data class Client(
     val middleName: String,
     val dateBirthday: Date,
     val address: String,
-    val created: Date
+    val created: Date,
+    val avatar: String
 )
 

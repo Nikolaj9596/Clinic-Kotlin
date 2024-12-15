@@ -13,8 +13,10 @@ object MockDataGenerator {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Определяем формат даты
 
         return listOf(
-            Client(1, "Иван", "Иванов", "Иванович", dateFormat.parse("1990-01-01") ?: Date(), "ул. Ленина, 1", Date()),
-            Client(2, "Мария", "Петрова", "Сергеевна", dateFormat.parse("1985-05-10") ?: Date(), "ул. Пушкина, 10", Date())
+            Client(1, "Иван", "Иванов", "Иванович", dateFormat.parse("1990-01-01") ?: Date(), "ул. Ленина, 1", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            Client(2, "Мария", "Петрова", "Сергеевна", dateFormat.parse("1985-05-10") ?: Date(), "ул. Пушкина, 10", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            Client(3, "Валерия", "Петрова", "Сергеевна", dateFormat.parse("1985-05-10") ?: Date(), "ул. Пушкина, 10", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            Client(4, "Антонина", "Ванина", "Сергеевна", dateFormat.parse("1985-05-10") ?: Date(), "ул. Пушкина, 10", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380")
         )
     }
 
