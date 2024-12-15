@@ -38,22 +38,10 @@ class MainActivity : ComponentActivity() {
                     topBar = { TopAppBar(title = { Text("Регистратура поликлиники") }) },
                     content = { innerPadding ->
                         // Навигация между экранами
-                        NavHost(
+                        NavigationHost(
                             navController = navController,
-                            startDestination = "login",
                             modifier = Modifier.padding(innerPadding)
-                        ) {
-                            composable("login") { LoginScreen(navController = navController) }
-                            composable("main") { MainScreen(navController = navController) }
-                            composable("clients") { ClientsScreen(navController = navController) }
-                            composable("client_details/{clientId}") { backStackEntry ->
-                                val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
-                                ClientDetailsScreen(clientId = clientId, onEdit = {clientId}, onDelete = {clientId})
-                            }
-                            composable("doctors") { DoctorsScreen() }
-                            composable("appointments") { AppointmentsScreen() }
-                            composable("diagnoses") { DiagnosesScreen() }
-                        }
+                        )
                     }
                 )
             }

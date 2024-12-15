@@ -44,14 +44,15 @@ fun ClientsScreen(navController: NavController) {
             items(clients) { client ->
                 ClientRow(client = client, onClick = {
                     navController.navigate("client_details/${client.id}")
-                })
+                }, navController=navController)
             }
         }
 
         FloatingActionButton(
-            onClick = { /* Ваш обработчик добавления клиента */ },
+            onClick = {navController.navigate("client_form")
+            },
             modifier = Modifier
-                .align(Alignment.BottomEnd) // Убедитесь, что align используется внутри Box
+                .align(Alignment.BottomEnd)
                 .padding(16.dp),
             containerColor = Color(0xFF6A1B9A) // Цвет кнопки
         ) {
@@ -65,7 +66,7 @@ fun ClientsScreen(navController: NavController) {
 }
 
 @Composable
-fun ClientRow(client: Client, onClick: () -> Unit) {
+fun ClientRow(client: Client, navController: NavController, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -145,7 +146,8 @@ fun ClientRow(client: Client, onClick: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.align(Alignment.CenterVertically)
             ) {
-                IconButton(onClick = { /* Обработчик редактирования */ }) {
+                IconButton(onClick = {navController.navigate("client_form/${client.id}")
+                }) {
                     Icon(
                         imageVector = Icons.Filled.Edit,
                         contentDescription = "Редактировать"

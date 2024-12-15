@@ -29,6 +29,7 @@ import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.clinic.R
@@ -36,7 +37,7 @@ import com.example.clinic.ui.main.ClientsScreen
 import com.example.clinic.utils.MockDataGenerator
 
 @Composable
-fun ClientDetailsScreen(clientId: Int, onEdit: (Int) -> Unit, onDelete: (Int) -> Unit) {
+fun ClientDetailsScreen(clientId: Int, onEdit: (Int) -> Unit, onDelete: (Int) -> Unit, navController: NavController) {
     val client = MockDataGenerator.getClients().find { it.id == clientId }
 
     client?.let {
