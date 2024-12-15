@@ -1,5 +1,6 @@
 package com.example.clinic
 
+import ClientDetailsScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -44,7 +45,11 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable("login") { LoginScreen(navController = navController) }
                             composable("main") { MainScreen(navController = navController) }
-                            composable("clients") { ClientsScreen() }
+                            composable("clients") { ClientsScreen(navController = navController) }
+                            composable("client_details/{clientId}") { backStackEntry ->
+                                val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
+                                ClientDetailsScreen(clientId = clientId)
+                            }
                             composable("doctors") { DoctorsScreen() }
                             composable("appointments") { AppointmentsScreen() }
                             composable("diagnoses") { DiagnosesScreen() }

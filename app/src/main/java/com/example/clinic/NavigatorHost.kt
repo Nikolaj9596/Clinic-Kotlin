@@ -1,5 +1,6 @@
 package com.example.clinic
 
+import ClientDetailsScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -21,7 +22,11 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
     ) {
         composable("login") { LoginScreen(navController = navController) }
         composable("main") { MainScreen(navController = navController) }
-        composable("clients") { ClientsScreen() }
+        composable("clients") { ClientsScreen(navController = navController) }
+        composable("client_details/{clientId}") { backStackEntry ->
+            val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
+            ClientDetailsScreen(clientId = clientId)
+        }
         composable("doctors") { DoctorsScreen() }
         composable("appointments") { AppointmentsScreen() }
         composable("diagnoses") { DiagnosesScreen() }
