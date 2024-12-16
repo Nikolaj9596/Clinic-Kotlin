@@ -1,6 +1,6 @@
 package com.example.clinic
 
-import ClientDetailsScreen
+import com.example.clinic.ui.main.clients.ClientDetailsScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -9,10 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import com.example.clinic.ui.auth.LoginScreen
 import com.example.clinic.ui.main.AppointmentsScreen
-import com.example.clinic.ui.main.ClientFormScreen
-import com.example.clinic.ui.main.ClientsScreen
+import com.example.clinic.ui.main.clients.ClientFormScreen
+import com.example.clinic.ui.main.clients.ClientsScreen
 import com.example.clinic.ui.main.DiagnosesScreen
-import com.example.clinic.ui.main.DoctorsScreen
+import com.example.clinic.ui.main.doctors.DoctorsScreen
 import com.example.clinic.ui.main.MainScreen
 import com.example.clinic.utils.MockDataGenerator
 
@@ -25,10 +25,24 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
     ) {
         composable("login") { LoginScreen(navController = navController) }
         composable("main") { MainScreen(navController = navController) }
-        composable("clients") { ClientsScreen(navController = navController) }
+        // Clients
+        composable("clients") { ClientsScreen(
+            navController = navController,
+            onDelete = {
+                clientId -> MockDataGenerator.deleteClient(clientId)
+                navController.navigate("clients")
+            }) }
         composable("client_details/{clientId}") { backStackEntry ->
             val clientId = backStackEntry.arguments?.getString("clientId")?.toInt() ?: 0
-            ClientDetailsScreen(clientId = clientId, onDelete = {clientId}, onEdit = {clientId}, navController = navController)
+            ClientDetailsScreen(
+                clientId = clientId,
+                onDelete = {
+                    clientId -> MockDataGenerator.deleteClient(clientId)
+                    navController.navigate("clients")
+                },
+                onEdit = {clientId -> navController.navigate("client_form/${clientId}")},
+                navController = navController
+            )
         }
         composable(
             "client_form/{clientId}",
@@ -46,12 +60,21 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                     }
                 },
                 onDelete = { clientId ->
-                    MockDataGenerator.deleteClient(clientId) // Удаляем клиента
+                    MockDataGenerator.deleteClient(clientId)
+                    navController.navigate("clients")
                 },
-                onCancel = { navController.popBackStack() }
+                onCancel = { navController.popBackStack() },
+                navController=navController
             )
         }
-        composable("doctors") { DoctorsScreen() }
+        //Doctors
+        composable("doctors") { DoctorsScreen(
+            navController=navController,
+            onDelete = {
+                doctorId -> MockDataGenerator.deleteDoctor(doctorId)
+                navController.navigate("doctors")
+            }
+        ) }
         composable("appointments") { AppointmentsScreen() }
         composable("diagnoses") { DiagnosesScreen() }
     }

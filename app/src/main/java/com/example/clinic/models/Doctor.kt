@@ -9,5 +9,6 @@ data class Doctor(
     val middleName: String,
     val profession: Profession,
     val dateStartWork: Date,
-    val created: Date
+    val created: Date,
+    val avatar: String
 )

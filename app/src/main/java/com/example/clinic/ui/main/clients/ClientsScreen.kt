@@ -1,4 +1,4 @@
-package com.example.clinic.ui.main
+package com.example.clinic.ui.main.clients
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,8 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -32,7 +30,7 @@ import com.example.clinic.models.Client
 import com.example.clinic.utils.MockDataGenerator
 
 @Composable
-fun ClientsScreen(navController: NavController) {
+fun ClientsScreen(navController: NavController,  onDelete: (Int) -> Unit) {
     val clients = MockDataGenerator.getClients()
     Box(modifier = Modifier.fillMaxSize()) {
         // Список клиентов
@@ -44,7 +42,7 @@ fun ClientsScreen(navController: NavController) {
             items(clients) { client ->
                 ClientRow(client = client, onClick = {
                     navController.navigate("client_details/${client.id}")
-                }, navController=navController)
+                }, navController=navController, onDelete=onDelete)
             }
         }
 
@@ -66,7 +64,7 @@ fun ClientsScreen(navController: NavController) {
 }
 
 @Composable
-fun ClientRow(client: Client, navController: NavController, onClick: () -> Unit) {
+fun ClientRow(client: Client, navController: NavController, onClick: () -> Unit, onDelete: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -153,7 +151,7 @@ fun ClientRow(client: Client, navController: NavController, onClick: () -> Unit)
                         contentDescription = "Редактировать"
                     )
                 }
-                IconButton(onClick = { /* Обработчик удаления */ }) {
+                IconButton(onClick = {onDelete(client.id) }) {
                     Icon(
                         imageVector = Icons.Filled.Delete,
                         contentDescription = "Удалить",

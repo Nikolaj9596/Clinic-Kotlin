@@ -1,4 +1,4 @@
-package com.example.clinic.ui.main
+package com.example.clinic.ui.main.clients
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -15,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.clinic.models.Client
 import java.util.Date
 
@@ -25,7 +28,8 @@ fun ClientFormScreen(
     client: Client? = null, // Если null, то создаем нового клиента
     onSave: (Client) -> Unit,
     onDelete: (Int) -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
+    navController: NavController
 ) {
     var firstName = remember { mutableStateOf(client?.firstName ?: "") }
     var lastName = remember { mutableStateOf(client?.lastName ?: "") }
@@ -33,6 +37,7 @@ fun ClientFormScreen(
     var dateOfBirth = remember { mutableStateOf(client?.dateBirthday ?: Date()) }
     var address = remember { mutableStateOf(client?.address ?: "") }
     var avatarUrl = remember { mutableStateOf(client?.avatar ?: "") }
+    var client_id = client?.id ?: (0..Int.MAX_VALUE).random()
 
     Column(
         modifier = Modifier
@@ -77,12 +82,13 @@ fun ClientFormScreen(
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+
             Button(
                 onClick = {
                     // Сохранение клиента
                     onSave(
                         Client(
-                            id = client?.id ?: (0..Int.MAX_VALUE).random(),
+                            id = client_id,
                             firstName = firstName.value,
                             lastName = lastName.value,
                             middleName = middleName.value,
@@ -91,7 +97,9 @@ fun ClientFormScreen(
                             created = client?.created ?: Date(),
                             avatar = avatarUrl.value
                         )
+
                     )
+                    navController.navigate("client_details/${client_id}")
                 },
                 modifier = Modifier.fillMaxWidth(0.5f)
             ) {
@@ -100,9 +108,9 @@ fun ClientFormScreen(
             client?.let {
                 Button(
                     onClick = { onDelete(it.id) },
-                    modifier = Modifier.fillMaxWidth(0.5f)
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
                 ) {
-                    Text("Удалить")
+                    Text(text = "Удалить", color = Color.White)
                 }
             }
         }

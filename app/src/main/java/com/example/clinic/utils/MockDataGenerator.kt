@@ -36,10 +36,27 @@ object MockDataGenerator {
         clients.removeAll { it.id == clientId }
     }
 
+    private val doctors = mutableListOf(
+        Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+        Doctor(2, "Анна", "Кузнецова", "Александровна", Profession(2, "Хирург"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380")
+    )
+
     fun getDoctors(): List<Doctor> {
-        return listOf(
-            Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date()),
-            Doctor(2, "Анна", "Кузнецова", "Александровна", Profession(2, "Хирург"), Date(), Date())
-        )
+        return doctors
+    }
+
+    fun addDoctor(doctor: Doctor) {
+        doctors.add(doctor)
+    }
+
+    fun updateDoctor(updatedDoctor: Doctor) {
+        val index = doctors.indexOfFirst { it.id == updatedDoctor.id }
+        if (index != -1) {
+            doctors[index] = updatedDoctor
+        }
+    }
+
+    fun deleteDoctor(doctorId: Int) {
+        doctors.removeAll { it.id == doctorId }
     }
 }

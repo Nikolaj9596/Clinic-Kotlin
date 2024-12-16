@@ -1,28 +1,15 @@
 package com.example.clinic
 
-import ClientDetailsScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.clinic.ui.auth.LoginScreen
-import com.example.clinic.ui.main.AppointmentsScreen
-import com.example.clinic.ui.main.ClientsScreen
-import com.example.clinic.ui.main.DiagnosesScreen
-import com.example.clinic.ui.main.DoctorsScreen
-import com.example.clinic.ui.main.MainScreen
 import com.example.clinic.ui.theme.ClinicTheme
 
 class MainActivity : ComponentActivity() {

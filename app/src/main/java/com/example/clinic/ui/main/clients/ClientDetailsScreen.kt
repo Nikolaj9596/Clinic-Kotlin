@@ -1,3 +1,5 @@
+package com.example.clinic.ui.main.clients
+
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,15 +27,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.clinic.R
-import com.example.clinic.ui.main.ClientsScreen
 import com.example.clinic.utils.MockDataGenerator
 
 @Composable
@@ -145,11 +142,4 @@ fun ClientDetailsScreen(clientId: Int, onEdit: (Int) -> Unit, onDelete: (Int) ->
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewClientsScreen() {
-    val navController = rememberNavController()
-    ClientsScreen(navController = navController)
 }
