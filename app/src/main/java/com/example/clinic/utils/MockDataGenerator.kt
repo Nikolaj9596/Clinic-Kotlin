@@ -35,7 +35,16 @@ object MockDataGenerator {
     fun deleteClient(clientId: Int) {
         clients.removeAll { it.id == clientId }
     }
+    private val profession = mutableListOf(
+        Profession(1, "Терапевт"),
+        Profession(2, "Хирург"),
+        Profession(3, "Стомотолог"),
+        Profession(4, "Окулист"),
+    )
 
+    fun getProfessions(): List<Profession> {
+        return profession
+    }
     private val doctors = mutableListOf(
         Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
         Doctor(2, "Анна", "Кузнецова", "Александровна", Profession(2, "Хирург"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380")

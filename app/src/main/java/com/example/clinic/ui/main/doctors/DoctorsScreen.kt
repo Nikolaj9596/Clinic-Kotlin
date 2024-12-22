@@ -18,9 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -31,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.clinic.R
-import com.example.clinic.models.Client
 import com.example.clinic.models.Doctor
 import com.example.clinic.utils.MockDataGenerator
 
@@ -46,7 +42,7 @@ fun DoctorsScreen(navController: NavController, onDelete: (Int) -> Unit) {
         ) {
             items(doctors) { doctor ->
                 DoctorRow(doctor = doctor, onClick = {
-                    navController.navigate("client_details/${doctor.id}")
+                    navController.navigate("doctor_details/${doctor.id}")
                 }, navController=navController, onDelete=onDelete)
             }
         }
