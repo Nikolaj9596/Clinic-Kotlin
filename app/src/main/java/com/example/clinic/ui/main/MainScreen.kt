@@ -33,7 +33,7 @@ fun MainScreen(navController: NavController) {
             Text("Запись на прием")
         }
         Button(
-            onClick = { navController.navigate("diagnoses") },
+            onClick = { navController.navigate("diagnosis") },
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
         ) {
             Text("Диагнозы")

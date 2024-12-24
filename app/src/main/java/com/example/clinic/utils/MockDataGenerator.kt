@@ -3,7 +3,9 @@ package com.example.clinic.utils
 import java.text.SimpleDateFormat
 import java.util.*
 import com.example.clinic.models.Client
+import com.example.clinic.models.Diagnosis
 import com.example.clinic.models.Doctor
+import com.example.clinic.models.DoctorAppointment
 import com.example.clinic.models.Profession
 import java.util.Date
 
@@ -67,5 +69,61 @@ object MockDataGenerator {
 
     fun deleteDoctor(doctorId: Int) {
         doctors.removeAll { it.id == doctorId }
+    }
+    private val diagnoses = mutableListOf<Diagnosis>()
+
+    fun addDiagnosis(diagnosis: Diagnosis) {
+        diagnoses.add(diagnosis)
+    }
+
+    fun updateDiagnosis(updatedDiagnosis: Diagnosis) {
+        val index = diagnoses.indexOfFirst { it.id == updatedDiagnosis.id }
+        if (index != -1) {
+            diagnoses[index] = updatedDiagnosis
+        }
+    }
+
+    fun deleteDiagnosis(diagnosisId: Int) {
+        diagnoses.removeAll { it.id == diagnosisId }
+    }
+
+    fun getDiagnosisById(diagnosisId: Int): Diagnosis? {
+        return diagnoses.find { it.id == diagnosisId }
+    }
+
+    fun getAllDiagnoses(): List<Diagnosis> {
+        return diagnoses.toList()
+    }
+    private val appointments = mutableListOf<DoctorAppointment>()
+
+    fun addAppointment(appointment: DoctorAppointment) {
+        appointments.add(appointment)
+    }
+
+    fun updateAppointment(updatedAppointment: DoctorAppointment) {
+        val index = appointments.indexOfFirst { it.id == updatedAppointment.id }
+        if (index != -1) {
+            appointments[index] = updatedAppointment
+        }
+    }
+
+    fun deleteAppointment(appointmentId: Int) {
+        appointments.removeAll { it.id == appointmentId }
+    }
+
+    fun getAppointmentById(appointmentId: Int): DoctorAppointment? {
+        return appointments.find { it.id == appointmentId }
+    }
+
+    fun getAllAppointments(): List<DoctorAppointment> {
+        return appointments.toList()
+    }
+
+    fun getAppointmentsByDoctor(doctorId: Int): List<DoctorAppointment> {
+        return appointments.filter { it.doctor.id == doctorId }
+    }
+
+    fun getAppointmentsByClient(clientId: Int): List<DoctorAppointment> {
+        return appointments.filter { it.client.id == clientId }
     }
 }

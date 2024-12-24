@@ -11,9 +11,10 @@ import com.example.clinic.ui.auth.LoginScreen
 import com.example.clinic.ui.main.AppointmentsScreen
 import com.example.clinic.ui.main.clients.ClientFormScreen
 import com.example.clinic.ui.main.clients.ClientsScreen
-import com.example.clinic.ui.main.DiagnosesScreen
 import com.example.clinic.ui.main.doctors.DoctorsScreen
+import com.example.clinic.ui.main.diagnosis.DiagnosesScreen
 import com.example.clinic.ui.main.MainScreen
+import com.example.clinic.ui.main.diagnosis.DiagnosisDetailsScreen
 import com.example.clinic.ui.main.doctors.DoctorDetailsScreen
 import com.example.clinic.ui.main.doctors.DoctorFormScreen
 import com.example.clinic.utils.MockDataGenerator
@@ -112,7 +113,20 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                 navController=navController
             )
         }
+        // Diagnosis
+        composable("diagnosis") { DiagnosesScreen(navController=navController, onDelete = {diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)})}
+        composable("diagnosis_details/{diagnosisId}") { backStackEntry ->
+            val diagnosisId = backStackEntry.arguments?.getString("diagnosisId")?.toInt() ?: 0
+            DiagnosisDetailsScreen(
+                diagnosisId = diagnosisId,
+                onDelete = {
+                        diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)
+                    navController.navigate("diagnosis")
+                },
+                onEdit = {diagnosisId -> navController.navigate("diagnosis_form/${diagnosisId}")},
+                navController = navController
+            )
+        }
         composable("appointments") { AppointmentsScreen() }
-        composable("diagnoses") { DiagnosesScreen() }
     }
 }
