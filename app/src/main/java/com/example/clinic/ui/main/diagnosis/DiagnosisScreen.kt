@@ -22,6 +22,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,8 +40,9 @@ import com.example.clinic.utils.MockDataGenerator
 import androidx.compose.ui.Alignment
 
 @Composable
-    fun DiagnosesScreen(navController: NavController, onDelete: (Int) -> Unit) {
+fun DiagnosesScreen(navController: NavController, onDelete: (Int) -> Unit) {
     val diagnoses = MockDataGenerator.getAllDiagnoses() // Получение списка заболеваний
+
     Box(modifier = Modifier.fillMaxSize()) {
         // Список заболеваний
         LazyColumn(
@@ -55,18 +57,37 @@ import androidx.compose.ui.Alignment
             }
         }
 
-        FloatingActionButton(
-            onClick = { navController.navigate("diagnosis_form") },
+        // Используем Row для размещения кнопок рядом друг с другом
+        Row(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp),
-            containerColor = Color(0xFF6A1B9A) // Цвет кнопки
+                .padding(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Добавить заболевание",
-                tint = Color.White
-            )
+            // Кнопка для добавления заболевания
+            FloatingActionButton(
+                onClick = { navController.navigate("diagnosis_form") },
+                modifier = Modifier
+                    .padding(end = 16.dp), // Отступ между кнопками
+                containerColor = Color(0xFF6A1B9A)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Добавить заболевание",
+                    tint = Color.White
+                )
+            }
+
+            // Кнопка для возврата в главное меню
+            FloatingActionButton(
+                onClick = { navController.navigate("main") },
+                containerColor = Color(0xFF6A1B9A)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Главное меню",
+                    tint = Color.White
+                )
+            }
         }
     }
 }

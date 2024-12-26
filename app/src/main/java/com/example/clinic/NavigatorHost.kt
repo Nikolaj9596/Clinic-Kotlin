@@ -15,6 +15,7 @@ import com.example.clinic.ui.main.doctors.DoctorsScreen
 import com.example.clinic.ui.main.diagnosis.DiagnosesScreen
 import com.example.clinic.ui.main.MainScreen
 import com.example.clinic.ui.main.diagnosis.DiagnosisDetailsScreen
+import com.example.clinic.ui.main.diagnosis.DiagnosisFormScreen
 import com.example.clinic.ui.main.doctors.DoctorDetailsScreen
 import com.example.clinic.ui.main.doctors.DoctorFormScreen
 import com.example.clinic.utils.MockDataGenerator
@@ -47,6 +48,7 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                 navController = navController
             )
         }
+
         composable(
             "client_form/{clientId}",
             deepLinks = listOf(navDeepLink { uriPattern = "android-app://androidx.navigation/client_form" })
@@ -90,19 +92,19 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                 navController = navController
             )
         }
+
         composable(
             "doctor_form/{doctorId}",
             deepLinks = listOf(navDeepLink { uriPattern = "android-app://androidx.navigation/doctor_form" })
-
         ) { backStackEntry ->
             val doctorId = backStackEntry.arguments?.getString("doctorId")?.toIntOrNull()
             DoctorFormScreen(
                 doctor = MockDataGenerator.getDoctors().find { it.id == doctorId },
                 onSave = { doctor ->
                     if (doctorId == null) {
-                        MockDataGenerator.addDoctor(doctor) // Создаем нового клиента
+                        MockDataGenerator.addDoctor(doctor)
                     } else {
-                        MockDataGenerator.updateDoctor(doctor) // Обновляем существующего клиента
+                        MockDataGenerator.updateDoctor(doctor)
                     }
                 },
                 onDelete = { doctorId ->
@@ -113,18 +115,47 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                 navController=navController
             )
         }
+
         // Diagnosis
-        composable("diagnosis") { DiagnosesScreen(navController=navController, onDelete = {diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)})}
+        composable("diagnosis") { DiagnosesScreen(
+            navController=navController,
+            onDelete = {
+                diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)
+                navController.navigate("diagnosis")
+            })}
         composable("diagnosis_details/{diagnosisId}") { backStackEntry ->
             val diagnosisId = backStackEntry.arguments?.getString("diagnosisId")?.toInt() ?: 0
             DiagnosisDetailsScreen(
                 diagnosisId = diagnosisId,
                 onDelete = {
-                        diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)
+                    diagnosisId -> MockDataGenerator.deleteDiagnosis(diagnosisId)
                     navController.navigate("diagnosis")
                 },
                 onEdit = {diagnosisId -> navController.navigate("diagnosis_form/${diagnosisId}")},
                 navController = navController
+            )
+        }
+
+        composable(
+            "diagnosis_form/{diagnosisId}",
+            deepLinks = listOf(navDeepLink { uriPattern = "android-app://androidx.navigation/diagnosis_form" })
+        ) { backStackEntry ->
+            val diagnosisId = backStackEntry.arguments?.getString("diagnosisId")?.toIntOrNull()
+            DiagnosisFormScreen(
+                diagnosis = diagnosisId?.let { MockDataGenerator.getDiagnosisById(it) },
+                onSave = { diagnosis ->
+                    if (diagnosisId == null) {
+                        MockDataGenerator.addDiagnosis(diagnosis)
+                    } else {
+                        MockDataGenerator.updateDiagnosis(diagnosis)
+                    }
+                },
+                onDelete = { diagnosisId ->
+                    MockDataGenerator.deleteDiagnosis(diagnosisId)
+                    navController.navigate("diagnosis")
+                },
+                onCancel = { navController.popBackStack() },
+                navController=navController
             )
         }
         composable("appointments") { AppointmentsScreen() }

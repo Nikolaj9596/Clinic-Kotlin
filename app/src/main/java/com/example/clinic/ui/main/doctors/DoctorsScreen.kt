@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,21 +48,35 @@ fun DoctorsScreen(navController: NavController, onDelete: (Int) -> Unit) {
             }
         }
 
-        FloatingActionButton(
-            onClick = {navController.navigate("doctor_form")
-            },
+        Row(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp),
-            containerColor = Color(0xFF6A1B9A)
+                .padding(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Добавить Врача",
-                tint = Color.White
-            )
-        }
-    }
+            FloatingActionButton(
+                onClick = {navController.navigate("doctor_form")
+                },
+                modifier = Modifier
+                    .padding(end = 16.dp),
+                containerColor = Color(0xFF6A1B9A)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Добавить Врача",
+                    tint = Color.White
+                )
+            }
+            FloatingActionButton(
+                onClick = { navController.navigate("main") },
+                containerColor = Color(0xFF6A1B9A)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Главное меню",
+                    tint = Color.White
+                )
+            }
+    }}
 }
 
 @Composable

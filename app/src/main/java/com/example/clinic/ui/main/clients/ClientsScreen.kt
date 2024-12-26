@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,12 +47,16 @@ fun ClientsScreen(navController: NavController,  onDelete: (Int) -> Unit) {
             }
         }
 
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        ) {
         FloatingActionButton(
             onClick = {navController.navigate("client_form")
             },
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp),
+                .padding(end = 16.dp),
             containerColor = Color(0xFF6A1B9A) // Цвет кнопки
         ) {
             Icon(
@@ -60,6 +65,19 @@ fun ClientsScreen(navController: NavController,  onDelete: (Int) -> Unit) {
                 tint = Color.White
             )
         }
+
+        // Кнопка для возврата в главное меню
+        FloatingActionButton(
+            onClick = { navController.navigate("main") },
+            containerColor = Color(0xFF6A1B9A)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Home,
+                contentDescription = "Главное меню",
+                tint = Color.White
+            )
+        }
+    }
     }
 }
 

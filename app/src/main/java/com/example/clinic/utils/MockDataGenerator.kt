@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.example.clinic.models.Client
 import com.example.clinic.models.Diagnosis
+import com.example.clinic.models.DiagnosisStatus
 import com.example.clinic.models.Doctor
 import com.example.clinic.models.DoctorAppointment
 import com.example.clinic.models.Profession
+import java.time.LocalDateTime
 import java.util.Date
 
 object MockDataGenerator {
@@ -70,7 +72,10 @@ object MockDataGenerator {
     fun deleteDoctor(doctorId: Int) {
         doctors.removeAll { it.id == doctorId }
     }
-    private val diagnoses = mutableListOf<Diagnosis>()
+
+    private val diagnoses = mutableListOf<Diagnosis>(
+        Diagnosis(1, "Насморк", "Какое-то описание", Client(1, "Иван", "Иванов", "Иванович", dateFormat.parse("1985-05-10") ?: Date(), "ул. Ленина, 1", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"), Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"), DiagnosisStatus.ACTIVE, LocalDateTime.now())
+    )
 
     fun addDiagnosis(diagnosis: Diagnosis) {
         diagnoses.add(diagnosis)
@@ -94,6 +99,9 @@ object MockDataGenerator {
     fun getAllDiagnoses(): List<Diagnosis> {
         return diagnoses.toList()
     }
+
+    // Appointments
+
     private val appointments = mutableListOf<DoctorAppointment>()
 
     fun addAppointment(appointment: DoctorAppointment) {

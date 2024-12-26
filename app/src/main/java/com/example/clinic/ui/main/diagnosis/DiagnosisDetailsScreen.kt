@@ -35,7 +35,8 @@ fun DiagnosisDetailsScreen(
     onDelete: (Int) -> Unit,
     navController: NavController
 ) {
-    val diagnosis = MockDataGenerator.getAllDiagnoses().find { it.id == diagnosisId }
+    val diagnosis = MockDataGenerator.getDiagnosisById(diagnosisId)
+    print(diagnosis)
     diagnosis?.let {
     Card(
         modifier = Modifier
