@@ -8,12 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import com.example.clinic.ui.auth.LoginScreen
-import com.example.clinic.ui.main.AppointmentsScreen
+import com.example.clinic.ui.main.appointments.AppointmentsScreen
 import com.example.clinic.ui.main.clients.ClientFormScreen
 import com.example.clinic.ui.main.clients.ClientsScreen
 import com.example.clinic.ui.main.doctors.DoctorsScreen
 import com.example.clinic.ui.main.diagnosis.DiagnosesScreen
 import com.example.clinic.ui.main.MainScreen
+import com.example.clinic.ui.main.appointments.AppointmentFormScreen
 import com.example.clinic.ui.main.diagnosis.DiagnosisDetailsScreen
 import com.example.clinic.ui.main.diagnosis.DiagnosisFormScreen
 import com.example.clinic.ui.main.doctors.DoctorDetailsScreen
@@ -158,6 +159,33 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                 navController=navController
             )
         }
-        composable("appointments") { AppointmentsScreen() }
+        composable("appointments") { AppointmentsScreen(navController=navController, onDelete = {
+            appointmentsId ->
+            MockDataGenerator.deleteAppointment(appointmentsId)
+            navController.navigate("appointments")
+        }) }
+
+        composable(
+            "appointment_form/{appointmentsId}",
+            deepLinks = listOf(navDeepLink { uriPattern = "android-app://androidx.navigation/appointment_form" })
+        ) { backStackEntry ->
+            val appointmentsId = backStackEntry.arguments?.getString("appointmentsId")?.toIntOrNull()
+            AppointmentFormScreen(
+                appointment = appointmentsId?.let { MockDataGenerator.getAppointmentById(it) },
+                onSave = { appointment ->
+                    if (appointmentsId == null) {
+                        MockDataGenerator.addAppointment(appointment)
+                    } else {
+                        MockDataGenerator.updateAppointment(appointment)
+                    }
+                },
+                onDelete = { appointmentId ->
+                    MockDataGenerator.deleteAppointment(appointmentId)
+                    navController.navigate("appointments")
+                },
+                onCancel = { navController.popBackStack() },
+                navController=navController
+            )
+        }
     }
 }

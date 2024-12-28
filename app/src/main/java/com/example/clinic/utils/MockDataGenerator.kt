@@ -6,7 +6,7 @@ import com.example.clinic.models.Client
 import com.example.clinic.models.Diagnosis
 import com.example.clinic.models.DiagnosisStatus
 import com.example.clinic.models.Doctor
-import com.example.clinic.models.DoctorAppointment
+import com.example.clinic.models.Appointment
 import com.example.clinic.models.Profession
 import java.time.LocalDateTime
 import java.util.Date
@@ -102,13 +102,54 @@ object MockDataGenerator {
 
     // Appointments
 
-    private val appointments = mutableListOf<DoctorAppointment>()
+    private val appointments = mutableListOf<Appointment>(
+        Appointment(
+            id = 1,
+            doctor = Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            client = Client(1, "Иван", "Иванов", "Иванович", Date(1985, 5, 10), "ул. Ленина, 1", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            startDate = LocalDateTime.of(2024, 12, 10, 14, 30),
+            endDate = LocalDateTime.of(2024, 12, 10, 15, 30),
+            created = LocalDateTime.of(2024, 1, 15, 10, 0)
+        ),
+        Appointment(
+            id = 2,
+            doctor = Doctor(2, "Анна", "Кузнецова", "Александровна", Profession(2, "Хирург"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            client = Client(2, "Анна", "Петрова", "Сергеевна", Date(1990, 8, 15), "ул. Советская, 5", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            startDate = LocalDateTime.of(2025, 1, 12, 9, 30),
+            endDate = LocalDateTime.of(2025, 1, 12, 11, 0),
+            created = LocalDateTime.of(2023, 12, 20, 15, 0)
+        ),
+        Appointment(
+            id = 3,
+            doctor = Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            client = Client(1, "Иван", "Иванов", "Иванович", Date(1985, 5, 10), "ул. Ленина, 1", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            startDate = LocalDateTime.of(2024, 11, 1, 10, 0),
+            endDate = LocalDateTime.of(2024, 11, 1, 12, 0),
+            created = LocalDateTime.of(2023, 12, 1, 14, 0)
+        ),
+        Appointment(
+            id = 4,
+            doctor = Doctor(2, "Анна", "Кузнецова", "Александровна", Profession(2, "Хирург"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            client = Client(2, "Анна", "Петрова", "Сергеевна", Date(1990, 8, 15), "ул. Советская, 5", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            startDate = LocalDateTime.of(2024, 12, 20, 8, 0),
+            endDate = LocalDateTime.of(2024, 12, 20, 9, 30),
+            created = LocalDateTime.of(2023, 11, 15, 10, 30)
+        ),
+        Appointment(
+            id = 5,
+            doctor = Doctor(1, "Петр", "Смирнов", "Викторович", Profession(1, "Терапевт"), Date(), Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            client = Client(1, "Иван", "Иванов", "Иванович", Date(1985, 5, 10), "ул. Ленина, 1", Date(), "https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg?t=st=1734292766~exp=1734296366~hmac=5f9a25581ab2e189925684283d1097f2d194c06ce896c644a08c85ff1d10267c&w=1380"),
+            startDate = LocalDateTime.of(2024, 10, 15, 14, 30),
+            endDate = LocalDateTime.of(2024, 10, 15, 15, 30),
+            created = LocalDateTime.of(2023, 10, 1, 9, 0)
+        )
+    )
 
-    fun addAppointment(appointment: DoctorAppointment) {
+    fun addAppointment(appointment: Appointment) {
         appointments.add(appointment)
     }
 
-    fun updateAppointment(updatedAppointment: DoctorAppointment) {
+    fun updateAppointment(updatedAppointment: Appointment) {
         val index = appointments.indexOfFirst { it.id == updatedAppointment.id }
         if (index != -1) {
             appointments[index] = updatedAppointment
@@ -119,19 +160,19 @@ object MockDataGenerator {
         appointments.removeAll { it.id == appointmentId }
     }
 
-    fun getAppointmentById(appointmentId: Int): DoctorAppointment? {
+    fun getAppointmentById(appointmentId: Int): Appointment? {
         return appointments.find { it.id == appointmentId }
     }
 
-    fun getAllAppointments(): List<DoctorAppointment> {
+    fun getAllAppointments(): List<Appointment> {
         return appointments.toList()
     }
 
-    fun getAppointmentsByDoctor(doctorId: Int): List<DoctorAppointment> {
+    fun getAppointmentsByDoctor(doctorId: Int): List<Appointment> {
         return appointments.filter { it.doctor.id == doctorId }
     }
 
-    fun getAppointmentsByClient(clientId: Int): List<DoctorAppointment> {
+    fun getAppointmentsByClient(clientId: Int): List<Appointment> {
         return appointments.filter { it.client.id == clientId }
     }
 }

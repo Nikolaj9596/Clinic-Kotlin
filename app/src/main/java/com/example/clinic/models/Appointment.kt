@@ -2,11 +2,11 @@ package com.example.clinic.models
 
 import java.time.LocalDateTime
 
-class DoctorAppointment(
+class Appointment(
     val id: Int,
     val doctor: Doctor,
     val client: Client,
-    val startDateAppointment: LocalDateTime,
-    val endDateAppointment: LocalDateTime,
+    val startDate: LocalDateTime,
+    val endDate: LocalDateTime,
     val created: LocalDateTime
 )
